@@ -10,7 +10,7 @@ CAPS_WORD_ENABLE = yes         # Enable built-in Caps Word functionality
 IDLE_TIMEOUT_ENABLE = yes
 STARTUP_NUMLOCK_ON = yes
 ENCODER_DEFAULTACTIONS_ENABLE = no
-COLEMAK_LAYER_ENABLE = yes     # Enable Colemak layer / set to no to disable
+COLEMAK_LAYER_ENABLE = no     # Enable Colemak layer / set to no to disable
 INVERT_NUMLOCK_INDICATOR = yes
 GAME_ENABLE ?= yes             # Enable Paddle Game / set to no to disable
 ifeq ($(strip $(GAME_ENABLE)), yes)
