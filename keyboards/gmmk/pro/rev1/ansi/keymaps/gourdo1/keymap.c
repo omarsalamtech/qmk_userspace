@@ -28,6 +28,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <math.h>
 
+// Define a new layer for Palestine flag RGB mode
+#define _PALESTINE 10
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* Base Layout
@@ -76,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     #ifdef GAME_ENABLE
     [_FN1] = LAYOUT(
         EE_CLR,  KC_MYCM, KC_WHOM, KC_CALC, KC_MSEL, KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, KC_VOLD, KC_VOLU, KC_PSCR, KC_SCRL, KC_PAUS,           KC_SLEP,
-        PRNCONF, TG_CAPS, TG_PAD,  TG_ESC,  TG_DEL,  TG_TDCAP,TG_ENC,  TG_INS,TG_SPCMOD,TG_AUTOCR, _______, RGB_TOD, RGB_TOI, _______,           RGB_TOG,
+        PRNCONF, TG_CAPS, TG_PAD,  TG_ESC,  TG_DEL,  TG_TDCAP,TG_ENC,  TG_INS,TG_SPCMOD,TG_AUTOCR, TG(_PALESTINE), RGB_TOD, RGB_TOI, _______,   RGB_TOG,
         _______, RGB_SAD, RGB_VAI, RGB_SAI, NK_TOGG, _______, YAHOO,   _______, _______, OUTLOOK, TG(_GAME),SWAP_L, SWAP_R,  QK_BOOT,           KC_HOME,
         KC_CAPS, RGB_HUD, RGB_VAD, RGB_HUI, _______, GMAIL,   HOTMAIL, _______, _______, LOCKPC,  _______, _______,          _______,           KC_END,
         _______,          RGB_NITE,_______, _______, _______, QK_BOOT, KC_NUM,  _______, _______, DOTCOM,  KC_CAD,           _______, RGB_MOD,  _______,
@@ -95,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     #else
     [_FN1] = LAYOUT(
         EE_CLR,  KC_MYCM, KC_WHOM, KC_CALC, KC_MSEL, KC_MPRV, KC_MNXT, KC_MPLY, KC_MSTP, KC_VOLD, KC_VOLU, KC_PSCR, KC_SCRL, KC_PAUS,           KC_SLEP,
-        PRNCONF, TG_CAPS, TG_PAD,  TG_ESC,  TG_DEL,  TG_TDCAP,TG_ENC,  TG_INS,TG_SPCMOD,TG_AUTOCR, _______, RGB_TOD, RGB_TOI, _______,           RGB_TOG,
+        PRNCONF, TG_CAPS, TG_PAD,  TG_ESC,  TG_DEL,  TG_TDCAP,TG_ENC,  TG_INS,TG_SPCMOD,TG_AUTOCR, TG(_PALESTINE), RGB_TOD, RGB_TOI, _______,   RGB_TOG,
         _______, RGB_SAD, RGB_VAI, RGB_SAI, NK_TOGG, _______, YAHOO,   _______, _______, OUTLOOK, KC_PAUS, SWAP_L,  SWAP_R,  QK_BOOT,           KC_HOME,
         KC_CAPS, RGB_HUD, RGB_VAD, RGB_HUI, _______, GMAIL,   HOTMAIL, _______, _______, LOCKPC,  _______, _______,          _______,           KC_END,
         _______,          RGB_NITE,_______, _______, _______, QK_BOOT, KC_NUM,  _______, _______, DOTCOM,  KC_CAD,           _______, RGB_MOD,  _______,
@@ -148,6 +151,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______,                            KC_SPC,                             KC_RALT, _______, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
     #endif // COLEMAK_LAYER_ENABLE
+
+    [_PALESTINE] = LAYOUT(
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,
+        _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,
+        _______, _______, _______,                            _______,                            _______, _______, _______, _______, _______, _______
+    ),
 };
 
 #if defined(ENCODER_ENABLE) && !defined(ENCODER_DEFAULTACTIONS_ENABLE) // Encoder Functionality when not using userspace defaults
@@ -691,6 +703,44 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
         break;
         #endif //GAME_ENABLE
+        
+    case _PALESTINE:
+        // Palestine flag implementation
+        // Black stripe (top row)
+        for (uint8_t i = 0; i < ARRAY_SIZE(LED_PAL_BLACK_STRIPE); i++) {
+            rgb_matrix_set_color(LED_PAL_BLACK_STRIPE[i], RGB_PAL_BLACK);
+        }
+        
+        // White stripe (second row)
+        for (uint8_t i = 0; i < ARRAY_SIZE(LED_PAL_WHITE_STRIPE); i++) {
+            rgb_matrix_set_color(LED_PAL_WHITE_STRIPE[i], RGB_PAL_WHITE);
+        }
+        
+        // Green stripe (third row)
+        for (uint8_t i = 0; i < ARRAY_SIZE(LED_PAL_GREEN_STRIPE); i++) {
+            rgb_matrix_set_color(LED_PAL_GREEN_STRIPE[i], RGB_PAL_GREEN);
+        }
+        
+        // Red triangle (left side)
+        for (uint8_t i = 0; i < ARRAY_SIZE(LED_PAL_RED_TRIANGLE); i++) {
+            rgb_matrix_set_color(LED_PAL_RED_TRIANGLE[i], RGB_PAL_RED);
+        }
+        
+        // Light up the side LEDs in alternating colors
+        for (uint8_t i = 0; i < ARRAY_SIZE(LED_SIDE_LEFT); i++) {
+            if (i % 3 == 0) {
+                rgb_matrix_set_color(LED_SIDE_LEFT[i], RGB_PAL_BLACK);
+                rgb_matrix_set_color(LED_SIDE_RIGHT[i], RGB_PAL_BLACK);
+            } else if (i % 3 == 1) {
+                rgb_matrix_set_color(LED_SIDE_LEFT[i], RGB_PAL_WHITE);
+                rgb_matrix_set_color(LED_SIDE_RIGHT[i], RGB_PAL_WHITE);
+            } else {
+                rgb_matrix_set_color(LED_SIDE_LEFT[i], RGB_PAL_GREEN);
+                rgb_matrix_set_color(LED_SIDE_RIGHT[i], RGB_PAL_GREEN);
+            }
+        }
+        break;
+        
     default:
         #ifdef GAME_ENABLE
         if (game_start) {
