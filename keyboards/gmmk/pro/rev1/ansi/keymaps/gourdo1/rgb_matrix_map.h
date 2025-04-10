@@ -47,12 +47,6 @@ RGB rgb_value;
 #define RGB_TEST11 0x00, 0x80, 0xFF  // A - grn blue  good!
 #define RGB_TEST12 0x80, 0x00, 0xFF  // S - purple    good!
 
-// Palestine flag colors
-#define RGB_PAL_BLACK 0x00, 0x00, 0x00   // Black stripe
-#define RGB_PAL_WHITE 0xFF, 0xFF, 0xFF   // White stripe
-#define RGB_PAL_GREEN 0x00, 0x80, 0x00   // Green stripe
-#define RGB_PAL_RED   0xFF, 0x00, 0x00   // Red triangle
-
 // RGB LED locations
 enum led_location_map {
     LED_ESC, // 0, ESC, k13
@@ -293,28 +287,6 @@ const uint8_t LED_SIDE_RIGHT[] = {
     LED_R6,
     LED_R7,
     LED_R8
-};
-
-// Palestine flag LED rows (horizontal stripes)
-const uint8_t LED_PAL_BLACK_STRIPE[] = {
-    LED_1, LED_2, LED_3, LED_4, LED_5, LED_6, LED_7, LED_8, LED_9, LED_0
-};
-
-const uint8_t LED_PAL_WHITE_STRIPE[] = {
-    LED_Q, LED_W, LED_E, LED_R, LED_T, LED_Y, LED_U, LED_I, LED_O, LED_P
-};
-
-const uint8_t LED_PAL_GREEN_STRIPE[] = {
-    LED_A, LED_S, LED_D, LED_F, LED_G, LED_H, LED_J, LED_K, LED_L, LED_SCLN
-};
-
-const uint8_t LED_PAL_BOTTOM_ROW[] = {
-    LED_Z, LED_X, LED_C, LED_V, LED_B, LED_N, LED_M, LED_COMM, LED_DOT, LED_SLSH
-};
-
-// Palestine flag red triangle (left side)
-const uint8_t LED_PAL_RED_TRIANGLE[] = {
-    LED_1, LED_Q, LED_A, LED_Z
 };
 
 #ifdef GAME_ENABLE
